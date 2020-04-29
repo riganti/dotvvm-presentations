@@ -1,0 +1,50 @@
+﻿@viewModel CrudDemo.ViewModels.ProductListViewModel2, CrudDemo
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <div class="well">
+        <form DataContext="{value: Filter}" Validation.Target="{value: _this}"
+              class="form form-inline">
+
+            <div class="form-group">
+                <label>Search products</label>
+                <dot:TextBox Text="{value: SearchText}" class="form-control" />
+            </div>
+            <div class="form-group">
+                <dot:CheckBox Text="Only in stock" Checked="{value: AvailableOnly}" />
+            </div>
+            <div class="form-group">
+                <dot:Button Text="Apply Filter"
+                            Click="{command: _parent.ApplyFilters()}"
+                            IsSubmitButton
+                            class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+
+    <p>
+        <dot:RouteLink RouteName="ProductDetail" Text="New Product" class="btn btn-primary" />
+    </p>
+
+    <dot:GridView DataSource="{value: Products}" class="table table-striped" Validation.Enabled="false">
+        <dot:GridViewTemplateColumn HeaderText="Product" AllowSorting SortExpression="ProductName">
+            <dot:RouteLink RouteName="ProductDetail" Param-Id="{value: ProductId}">
+                {{value: ProductName}}
+            </dot:RouteLink>
+        </dot:GridViewTemplateColumn>
+        <dot:GridViewTextColumn HeaderText="Category" ValueBinding="{value: CategoryName}" AllowSorting />
+        <dot:GridViewTextColumn HeaderText="Supplier" ValueBinding="{value: SupplierName}" AllowSorting />
+        <dot:GridViewTextColumn HeaderText="Qty per unit" ValueBinding="{value: QuantityPerUnit}" />
+        <dot:GridViewTextColumn HeaderText="Units in stock" ValueBinding="{value: UnitsInStock}" AllowSorting />
+        <dot:GridViewTextColumn HeaderText="Units on order" ValueBinding="{value: UnitsOnOrder}" AllowSorting />
+        <dot:GridViewTemplateColumn>
+            <dot:LinkButton Text="Reorder" Click="{command: _parent.ReorderDialog.ShowDialog(ProductId)}"/>
+        </dot:GridViewTemplateColumn>
+    </dot:GridView>
+
+    <dot:DataPager DataSet="{value: Products}" class="pagination" Validation.Enabled="false" />
+
+    <cc:ReorderDialog DataContext="{value: ReorderDialog}" />
+
+</dot:Content>

@@ -1,0 +1,84 @@
+﻿@viewModel CrudDemo.ViewModels.ProductDetailViewModel, CrudDemo
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <h2>{{value: IsNew ? "New Product" : "Edit Product" }}</h2>
+
+    <form DataContext="{value: CurrentProduct}" class="form">
+
+        <div class="form-group" Visible="{value: !_parent.IsNew}">
+            <label>Product ID</label>
+            <div>
+                {{value: ProductId}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Name</label>
+            <div Validator.Value="{value: ProductName}">
+                <dot:TextBox Text="{value: ProductName}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <div Validator.Value="{value: CategoryId}">
+                <dot:ComboBox DataSource="{value: _parent.Categories}"
+                              ItemTextBinding="{value: CategoryName}"
+                              ItemValueBinding="{value: CategoryId}"
+                              SelectedValue="{value: CategoryId}"
+                              class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Supplier</label>
+            <div Validator.Value="{value: SupplierId}">
+                <dot:ComboBox DataSource="{value: _parent.Suppliers}"
+                              ItemTextBinding="{value: CompanyName}"
+                              ItemValueBinding="{value: SupplierId}"
+                              SelectedValue="{value: SupplierId}"
+                              class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Qty per unit</label>
+            <div Validator.Value="{value: QuantityPerUnit}">
+                <dot:TextBox Text="{value: QuantityPerUnit}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Units in stock</label>
+            <div Validator.Value="{value: UnitsInStock}">
+                <dot:TextBox Text="{value: UnitsInStock}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Units on order</label>
+            <div Validator.Value="{value: UnitsOnOrder}">
+                <dot:TextBox Text="{value: UnitsOnOrder}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group text-danger">
+            <dot:ValidationSummary Validation.Target="{value: _this}" />
+        </div>
+
+        <div class="form-group">
+            <dot:Button Text="Save"
+                        Click="{command: _parent.Save()}"
+                        IsSubmitButton
+                        class="btn btn-primary" />
+
+            <dot:RouteLink Text="Cancel"
+                           RouteName="ProductList"
+                           class="btn btn-danger" />
+        </div>
+    </form>
+
+</dot:Content>
+
