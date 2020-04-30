@@ -1,0 +1,43 @@
+﻿.badge-primary {
+    background-color: #b94a48;
+}
+
+    .badge-primary:hover {
+        background-color: #953b39;
+    }
+
+.badge-secondary {
+    background-color: #f89406;
+}
+
+    .badge-secondary:hover {
+        background-color: #c67605;
+    }
+
+.badge-warning {
+    background-color: #468847;
+}
+
+    .badge-warning:hover {
+        background-color: #356635;
+    }
+
+.badge-danger {
+    background-color: #3a87ad;
+}
+
+    .badge-danger:hover {
+        background-color: #2d6987;
+    }
+
+.badge-inverse {
+    background-color: #333333;
+}
+
+    .badge-inverse:hover {
+        background-color: #1a1a1a;
+    }
+
+.form-group table td {
+    padding: 0 1em 0 0;
+}

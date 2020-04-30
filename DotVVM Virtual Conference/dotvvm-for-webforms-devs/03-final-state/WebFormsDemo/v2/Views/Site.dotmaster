@@ -1,0 +1,66 @@
+﻿@viewModel WebFormsDemo.v2.ViewModels.SiteViewModel, WebFormsDemo
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <dot:ContentPlaceHolder ID="head">
+    </dot:ContentPlaceHolder>
+
+    <link href="Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/site.css" rel="stylesheet" />
+    <script src="Content/jquery/jquery.slim.min.js"></script>
+    <script src="Content/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="~/">
+                        Ultimate Task List
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <dot:AuthenticatedView>
+                        <NotAuthenticatedTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/login">Login</a></li>
+                            </ul>
+                        </NotAuthenticatedTemplate>
+                        <AuthenticatedTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        {{resource: Context.HttpContext.User.Identity.Name}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <dot:LinkButton Text="Sign Out"
+                                                            Click="{command: SignOut()}"
+                                                            Validation.Enabled="false"/>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </AuthenticatedTemplate>
+                    </dot:AuthenticatedView>
+                </div>
+            </div>
+        </nav>
+
+        <dot:ContentPlaceHolder ID="ContentPlaceHolder1">
+        </dot:ContentPlaceHolder>
+    </div>
+</body>
+</html>
