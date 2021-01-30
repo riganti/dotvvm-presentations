@@ -1,0 +1,33 @@
+﻿@viewModel CrudDemo.Controls.ReorderDialogViewModel, CrudDemo
+
+<div class="modal fade in" Visible="{value: IsDialogOpen}" Validation.Target="{value: _this}">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h4>Reorder Product</h4>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <label>Qty to reorder</label>
+                    <div Validator.Value="{value: QuantityToReorder}">
+                        <dot:TextBox Text="{value: QuantityToReorder}" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <dot:Button Text="Reorder Product"
+                            Click="{command: Reorder()}"
+                            IsSubmitButton
+                            class="btn btn-primary" />
+
+                <dot:Button Text="Cancel"
+                            Click="{command: HideDialog()}"
+                            Validation.Enabled="false"
+                            class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-backdrop fade in" Visible="{value: IsDialogOpen}"></div>

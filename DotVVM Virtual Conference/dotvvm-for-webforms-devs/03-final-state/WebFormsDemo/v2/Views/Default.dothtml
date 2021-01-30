@@ -1,0 +1,59 @@
+﻿@viewModel WebFormsDemo.v2.ViewModels.DefaultViewModel, WebFormsDemo
+@masterPage v2/Views/Site.dotmaster
+
+<dot:Content ID="Content1" ContentPlaceHolderID="head">
+</dot:Content>
+
+<dot:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1">
+
+    <div class="well">
+        <h2>Add Task</h2>
+
+        <form class="form">
+            <div class="form-group">
+                <label>Task</label>
+                <div>
+                    <dot:TextBox class="form-control"
+                                 Text="{value: NewTaskName}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Categories</label>
+                <div>
+                    <dot:Repeater DataSource="{value: Categories}">
+                        <dot:CheckBox CheckedItems="{value: _parent.SelectedCategoryIds}"
+                                      Text="{value: CategoryName}"
+                                      CheckedValue="{value: Id}" />
+                    </dot:Repeater>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <dot:Button Text="Add Task"
+                            IsSubmitButton="true"
+                            class="btn btn-primary" 
+                            Click="{command: OnAddTaskClick()}" />
+            </div>
+        </form>
+    </div>
+
+    <div class="list-group">
+        <dot:Repeater DataSource="{value: Tasks}">
+            <ItemTemplate>
+                <div class="list-group-item">
+                    {{value: TaskName}}
+
+                    <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false">
+                        <ItemTemplate>
+                            <span class="{value: "badge badge-" + CategoryColor}">
+                                {{value: CategoryName}}
+                            </span>
+                        </ItemTemplate>
+                    </dot:Repeater>
+                </div>
+            </ItemTemplate>
+        </dot:Repeater>
+    </div>
+
+</dot:Content>
